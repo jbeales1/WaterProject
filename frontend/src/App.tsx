@@ -1,11 +1,30 @@
 import './App.css'
-import ProjectList from './ProjectList'
+import { CartProvider } from './context/CartContext';
+import AdminProjectsPage from './pages/AdminProjectPage';
+import CartPage from './pages/CartPage';
+import DonatePage from './pages/DonatePage';
+import ProjectsPage from './pages/ProjectsPage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import CookieConsent from "react-cookie-consent"; 
+// add this in the App() function: <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
+// <Fingerprint />
 
 function App() {
 
+
   return (
     <>
-      <ProjectList />
+    <CartProvider>
+      <Router>
+        <Routes>
+          <Route path='/' element={<ProjectsPage />} />
+          <Route path='/projects' element={<ProjectsPage />} />
+          <Route path='/donate/:projectName/:projectId' element={<DonatePage />} />
+          <Route path='/cart' element={<CartPage />} />
+          <Route path='/adminprojects' element={<AdminProjectsPage />} />
+        </Routes>
+      </Router>
+    </CartProvider>
     </>
   )
 }
